@@ -1,0 +1,57 @@
+﻿@page
+@using reCAPTCHA.AspNetCore;
+@model WebApplication3.Pages.LoginModel
+@{
+}
+@section Scripts
+{
+	
+}
+
+<div class="container mt-5">
+
+	<div class="row justify-content-center align-items-center">
+
+		<div class="col-sm-12 col-md-12 col-lg-4">
+			<h1 class="mb-3">Login </h1>
+
+			<div class="g-recaptcha" data-sitekey="6LcrHVUkAAAAAAN1rTeIdwhz_79rg2HIXTL4QQeA">
+                <form method="post" id="form1">
+				<input type="hidden" id="LoginCaptcha" asp-for="LModel.CaptchaToken" />
+				<div class="mb-3">
+					<label class="form-label" asp-for="LModel.Email">Email Address</label>
+					<input type="Text" asp-for="LModel.Email" class="form-control" />
+					<span asp-validation-for="LModel.Email" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label" asp-for="LModel.Password">Password</label>
+					<input type="password" asp-for="LModel.Password" class="form-control" />
+					<span asp-validation-for="LModel.Password" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3 form-check">
+					<input type="checkbox" asp-for="LModel.RememberMe" class="form-check-input" />
+					<label class="form-check-label" asp-for="LModel.RememberMe">Remember Me?</label>
+				</div>
+
+				<div class="mb-3">
+					<button type="submit" class="btn btn-primary">Login</button>
+				</div>
+			</form>
+            </div>			
+		</div>
+	</div>
+</div>
+
+	<script src="https://www.google.com/recaptcha/api.js?render=6LfUAFUkAAAAAOIkcfB8IOIllMIEYjEBvAIDta6E"></script>
+	<script>
+		grecaptcha.ready(function () {
+			grecaptcha.execute('6LfUAFUkAAAAAOIkcfB8IOIllMIEYjEBvAIDta6E', { action: 'LOGIN' }).then(function (token) {
+				console.log(token)
+				document.getElementById("LoginCaptcha").value = token;
+			});
+		});
+	</script>
+
+
